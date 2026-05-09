@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block title %}Login - Plant Disease Detection{% endblock %}
+
+{% block content %}
+<!-- FULL-BLEED HERO (outside .container) -->
+<section class="login-hero text-white d-flex align-items-center justify-content-center"
+         style="
+            min-height: 100vh;                     /* full screen */
+            background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.6)),
+                        url('{{ url_for('static', filename='images/login.jpg') }}')
+                        center/cover no-repeat fixed;
+            margin:0;
+            padding:0;
+            width:100vw;
+            position:relative;
+            left:50%;
+            right:50%;
+            margin-left:-50vw;
+            margin-right:-50vw;
+            margin-top: calc(-1 * var(--navbar-height, 80px));
+         ">
+
+    <!-- THE SPLIT CARD -->
+    <div class="login-card-wrapper d-flex w-100" style="max-width:1100px;">
+        <!-- LEFT – IMAGE PANEL -->
+        <div class="left-panel flex-grow-1 position-relative overflow-hidden"
+             style="border-radius:24px 0 0 24px;">
+            <div class="img-overlay position-absolute top-0 start-0 w-100 h-100"
+                 style="background:url('{{ url_for('static', filename='images/img2.jpg') }}')
+                        center/cover no-repeat;"></div>
+
+            <div class="content position-relative p-5 text-white" style="z-index:2;">
+                <h1 class="display-4 fw-bold mb-3">Plant Leaf Disease Detection</h1>
+                <p class="lead">
+                    AI-powered diagnosis for <strong>38+ diseases</strong> across crops.<br>
+                    Protect your harvest with instant, accurate results.
+                </p>
+            </div>
+        </div>
+
+        <!-- RIGHT – LOGIN FORM -->
+        <div class="right-panel bg-white d-flex align-items-center justify-content-center p-4"
+             style="border-radius:0 24px 24px 0;min-width:380px;">
+            <div class="login-form w-100" style="max-width:380px;">
+                <h2 class="login-title text-center mb-4" style="
+                    font-weight:700;
+                    background:linear-gradient(90deg,#28a745,#218838);
+                    -webkit-background-clip:text;
+                    -webkit-text-fill-color:transparent;
+                    background-clip:text;
+                ">Login</h2>
+
+                <form id="loginForm" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username"
+                               required placeholder="Enter username">
+                        <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               required placeholder="Enter password">
+                        <div class="invalid-feedback">Please enter your password.</div>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100" id="loginBtn">
+                        Login
+                    </button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p class="mb-0">Don't have an account?
+                        <a href="{{ url_for('register') }}" class="text-success fw-600">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block styles %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+    html,body{height:100%;margin:0;padding:0;font-family:'Poppins',sans-serif;}
+    .login-hero *{box-sizing:border-box;}
+
+    /* card shadow + glass effect */
+    .login-card-wrapper{
+        background:rgba(255,255,255,.08);
+        backdrop-filter:blur(12px);
+        border:1px solid rgba(255,255,255,.15);
+        border-radius:24px;
+        overflow:hidden;
+        box-shadow:0 25px 50px rgba(0,0,0,.4);
+    }
+
+    /* left panel overlay */
+    .img-overlay{
+        background:linear-gradient(135deg,rgba(40,167,69,.3),rgba(0,0,0,.5));
+    }
+
+    /* form controls */
+    .form-control{
+        border-radius:12px;
+        padding:12px 16px;
+        border:1.5px solid #ced4da;
+        transition:.3s;
+    }
+    .form-control:focus{
+        border-color:#28a745;
+        box-shadow:0 0 0 .2rem rgba(40,167,69,.25);
+        transform:scale(1.02);
+    }
+    .btn-success{
+        background:linear-gradient(135deg,#28a745,#218838);
+        border:none;
+        border-radius:12px;
+        padding:12px;
+        font-weight:600;
+        transition:.3s;
+    }
+    .btn-success:hover{
+        background:linear-gradient(135deg,#218838,#1e7e34);
+        transform:translateY(-2px);
+        box-shadow:0 10px 20px rgba(40,167,69,.4);
+    }
+
+    /* alerts */
+    .alert{
+        border-radius:12px;
+        padding:10px 14px;
+        font-size:.9rem;
+        display:flex;
+        align-items:center;
+        gap:8px;
+    }
+
+    /* responsive */
+    @media (max-width:992px){
+        .login-card-wrapper{flex-direction:column;max-width:90%;}
+        .left-panel{border-radius:24px 24px 0 0;min-height:40vh;}
+        .right-panel{border-radius:0 0 24px 24px;}
+    }
+    @media (max-width:576px){
+        .right-panel{padding:2rem;}
+        .login-title{font-size:1.7rem;}
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        const f = e.target;
+        if(!f.checkValidity()){f.classList.add('was-validated');return;}
+
+        const data = {
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value
+        };
+
+        const btn = document.getElementById('loginBtn');
+        btn.disabled = true;
+        btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Signing in...`;
+
+        fetch('/login',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(data)
+        })
+        .then(r=>r.json())
+        .then(res=>{
+            showAlert(res.message||(res.success?'Login successful!':'Login failed!'),
+                      res.success?'success':'danger');
+            if(res.success) setTimeout(()=>location.href='/',1500);
+        })
+        .catch(()=>showAlert('Network error. Please try again.','danger'))
+        .finally(()=>{btn.disabled=false;btn.innerHTML='Login';});
+    });
+
+    function showAlert(msg,type){
+        document.querySelectorAll('.alert').forEach(a=>a.remove());
+        const a = document.createElement('div');
+        a.className=`alert alert-${type} alert-dismissible fade show mt-3`;
+        a.innerHTML=`<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-triangle'}"></i> ${msg}
+                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+        document.querySelector('.login-form').insertBefore(a,document.getElementById('loginForm'));
+        setTimeout(()=>a.remove(),5000);
+    }
+</script>
+{% endblock %}

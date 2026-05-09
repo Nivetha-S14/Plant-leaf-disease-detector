@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}Home - Plant Disease Detection{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Background Image -->
+<section class="hero-section text-white text-center py-5 position-relative overflow-hidden"
+         style="min-height: 80vh; display: flex; align-items: center;
+                background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0)),
+                            url('{{ url_for('static', filename='images/Plants-for-Plants-header-young-plant-fruit-growing.jpg') }}') center/cover no-repeat;
+                background-attachment: fixed;">
+    <div class="container position-relative z-3">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-3 fw-bold mb-4 text-white" style="text-shadow: 0 3px 10px rgba(0,0,0,0.6);">
+                    <i class="fas fa-leaf text-success me-3"></i>AI-Powered Plant Disease Detection
+                </h1>
+                <p class="lead mb-5 text-white-50 fs-4">
+                    Detect <strong class="text-success">38+ plant diseases</strong> instantly using Deep Learning + XGBoost.
+                </p>
+
+                {% if 'user_id' not in session %}
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{{ url_for('register') }}" class="btn btn-success btn-lg px-5 py-3 shadow-lg hover-lift">
+                        <i class="fas fa-user-plus me-2"></i>Get Started
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg px-5 py-3 shadow-lg hover-lift">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </a>
+                </div>
+                {% else %}
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{{ url_for('input_page') }}" class="btn btn-success btn-lg px-5 py-3 shadow-lg hover-lift">
+                        <i class="fas fa-camera me-2"></i>Detect Now
+                    </a>
+                    <a href="{{ url_for('history') }}" class="btn btn-outline-light btn-lg px-5 py-3 shadow-lg hover-lift">
+                        <i class="fas fa-history me-2"></i>View History
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-dark">Why Choose Us?</h2>
+            <p class="lead text-muted">Advanced AI for accurate and fast diagnosis</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center p-4 bg-light rounded shadow-sm h-100 border-start border-success border-5">
+                    <div class="mb-3">
+                        <i class="fas fa-brain text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="text-success fw-bold">Hybrid AI Model</h4>
+                    <p class="text-muted">DenseNet121 extracts features, XGBoost classifies — <strong>95%+ accuracy</strong>.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="text-center p-4 bg-light rounded shadow-sm h-100 border-start border-success border-5">
+                    <div class="mb-3">
+                        <i class="fas fa-leaf text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="text-success fw-bold">38+ Diseases</h4>
+                    <p class="text-muted">Tomato, Potato, Corn, Apple, Grape, and more — all major crops covered.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="text-center p-4 bg-light rounded shadow-sm h-100 border-start border-success border-5">
+                    <div class="mb-3">
+                        <i class="fas fa-bolt text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="text-success fw-bold">Instant Results</h4>
+                    <p class="text-muted">Upload image → Get disease name, confidence, and remedy in <strong>under 2 seconds</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-dark">How It Works</h2>
+        </div>
+
+        <div class="row g-5 align-items-center">
+            <div class="col-md-4 text-center">
+                <div class="step-circle mb-3 mx-auto d-flex align-items-center justify-content-center text-white fw-bold"
+                     style="width: 90px; height: 90px; background: #28a745; border-radius: 50%; font-size: 2.2rem; box-shadow: 0 5px 15px rgba(40,167,69,0.3);">
+                    1
+                </div>
+                <h5 class="text-success fw-bold">Upload Image</h5>
+                <p class="text-muted">Take or upload a clear photo of the affected plant leaf.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="step-circle mb-3 mx-auto d-flex align-items-center justify-content-center text-white fw-bold"
+                     style="width: 90px; height: 90px; background: #218838; border-radius: 50%; font-size: 2.2rem; box-shadow: 0 5px 15px rgba(33,136,56,0.3);">
+                    2
+                </div>
+                <h5 class="text-success fw-bold">AI Analysis</h5>
+                <p class="text-muted">Our model processes the image and identifies the disease.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="step-circle mb-3 mx-auto d-flex align-items-center justify-content-center text-white fw-bold"
+                     style="width: 90px; height: 90px; background: #1e7e34; border-radius: 50%; font-size: 2.2rem; box-shadow: 0 5px 15px rgba(30,126,52,0.3);">
+                    3
+                </div>
+                <h5 class="text-success fw-bold">Get Results</h5>
+                <p class="text-muted">Receive disease name, confidence score, and care tips.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action with Background -->
+<section class="py-5 text-white text-center position-relative overflow-hidden"
+         style="min-height: 70vh; display: flex; align-items: center;
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                            url('{{ url_for('static', filename='images/Plants-for-Plants-header-young-plant-fruit-growing.jpg') }}') center/cover no-repeat;
+                background-attachment: fixed;">
+    <div class="container position-relative z-3">
+        <h2 class="display-5 fw-bold mb-4" style="text-shadow: 0 3px 10px rgba(0,0,0,0.6);">
+            Ready to Protect Your Crops?
+        </h2>
+        <p class="lead mb-4 text-white-50">
+            Join thousands of farmers using AI to save their harvest.
+        </p>
+        {% if 'user_id' not in session %}
+        <a href="{{ url_for('register') }}" class="btn btn-success btn-lg px-5 py-3 shadow-lg hover-lift">
+            <i class="fas fa-seedling me-2"></i>Start Free Now
+        </a>
+        {% else %}
+        <a href="{{ url_for('input_page') }}" class="btn btn-success btn-lg px-5 py-3 shadow-lg hover-lift">
+            <i class="fas fa-camera me-2"></i>Detect Disease
+        </a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .hover-lift {
+        transition: all 0.3s ease;
+    }
+    .hover-lift:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-section, .bg-image-cta {
+            background-attachment: scroll !important;
+            min-height: 60vh !important;
+        }
+        .display-3 {
+            font-size: 2.5rem;
+        }
+        .display-5 {
+            font-size: 1.8rem;
+        }
+        .step-circle {
+            width: 70px !important;
+            height: 70px !important;
+            font-size: 1.8rem !important;
+        }
+    }
+
+    /* Subtle green border accent */
+    .border-start.border-5 {
+        border-left-width: 6px !important;
+    }
+</style>
+{% endblock %}
